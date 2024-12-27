@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparency Grid</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom transparency grid pattern using Tailwind's utilities */
+        .transparency-grid {
+            background-size: 16px 16px;
+            /* Set grid size */
+            background-image:
+                linear-gradient(45deg, #e5e7eb 25%, transparent 25%, transparent 75%, #e5e7eb 75%, #e5e7eb),
+                linear-gradient(45deg, #e5e7eb 25%, transparent 25%, transparent 75%, #e5e7eb 75%, #e5e7eb);
+            background-position: 0 0, 8px 8px;
+            /* Offset the pattern */
+        }
+    </style>
+</head>
+
+<body class="relative h-screen">
+
+    <!-- Fixed Transparency Grid -->
+    <div class="fixed inset-0 transparency-grid pointer-events-none"></div>
+
+    <!-- Scrollable Content -->
+    <div class="relative z-10 p-8">
+        <div class="bg-white/80 p-6 rounded-lg shadow-lg text-center">
+            <h1 class="text-2xl font-bold mb-2">Hello World</h1>
+            <p class="text-gray-600 mb-4">This is a transparency grid background made with Tailwind CSS.</p>
+        </div>
+        <!-- Example long content -->
+        <div class="mt-10 space-y-4">
+            <p class="text-gray-700">Scroll down to see the transparency grid effect.</p>
+            <div class="h-[1500px] bg-white/70 p-4 rounded-md shadow-md">
+                <p class="text-gray-500">More content goes here...</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
