@@ -40,6 +40,86 @@
         </div>
     </div>
 
+    <!-- Windows Name -->
+    <div id="windowNameFrame"
+        class="absolute mx-2 mt-2 mb-6 h-fit bg-white border-4 border-black shadow-[6px_6px_0px_rgba(0,0,0,1)] cursor-move">
+        <!-- Header -->
+        <div id="dragHandle" class="flex items-center justify-between bg-green-500 border-b-2 border-black p-1">
+            <!-- Close Button -->
+            <div class="flex items-center">
+                <button id="closeNameButton"
+                    class="w-6 h-6 bg-red-500 border-2 border-black flex items-center justify-center">
+                    <span class="text-xs font-bold text-black">X</span>
+                </button>
+            </div>
+        </div>
+        <!-- Frame Content -->
+        <div class="h-full p-1">
+            <div>
+                <a class="text-2xl font-bold">NAME PRODUCT</a>
+            </div>
+        </div>
+        <!-- Script -->
+        <script>
+            const windowFrame = document.getElementById("windowNameFrame");
+            const dragHandle = document.getElementById("dragHandle");
+
+            let isDragging = false;
+            let offsetX, offsetY;
+
+            // Function to handle the start of dragging (mouse and touch)
+            function startDrag(e) {
+                isDragging = true;
+                const clientX = e.type === "mousedown" ? e.clientX : e.touches[0].clientX;
+                const clientY = e.type === "mousedown" ? e.clientY : e.touches[0].clientY;
+
+                offsetX = clientX - windowFrame.offsetLeft;
+                offsetY = clientY - windowFrame.offsetTop;
+
+                document.body.style.userSelect = "none"; // Disable text selection
+            }
+
+            // Function to handle dragging movement (mouse and touch)
+            function onDrag(e) {
+                if (!isDragging) return;
+
+                const clientX = e.type === "mousemove" ? e.clientX : e.touches[0].clientX;
+                const clientY = e.type === "mousemove" ? e.clientY : e.touches[0].clientY;
+
+                const newX = clientX - offsetX;
+                const newY = clientY - offsetY;
+
+                // Update the frame's position
+                windowFrame.style.left = `${newX}px`;
+                windowFrame.style.top = `${newY}px`;
+            }
+
+            // Function to handle the end of dragging (mouse and touch)
+            function endDrag() {
+                isDragging = false;
+                document.body.style.userSelect = "auto"; // Re-enable text selection
+            }
+
+            // Add event listeners for mouse events
+            dragHandle.addEventListener("mousedown", startDrag);
+            document.addEventListener("mousemove", onDrag);
+            document.addEventListener("mouseup", endDrag);
+
+            // Add event listeners for touch events
+            dragHandle.addEventListener("touchstart", startDrag);
+            document.addEventListener("touchmove", onDrag);
+            document.addEventListener("touchend", endDrag);
+
+            // Close button functionality
+            document.getElementById("closeNameButton").addEventListener("click", function () {
+                windowFrame.classList.add("hidden");
+            });
+        </script>
+    </div>
+
+
+
+
 </body>
 
 </html>
